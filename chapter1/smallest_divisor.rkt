@@ -1,4 +1,5 @@
 #lang scheme
+(provide smallest-divisor prime?)
 (define (smallest-divisor n)
   (find-divisor n 2))
 
@@ -10,5 +11,5 @@
 (define (divides? a b)
   (= (remainder a b) 0))
 
-(define (primer? n)
+(define (prime? n)
   (= n (smallest-divisor n)))
