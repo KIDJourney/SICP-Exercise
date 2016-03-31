@@ -1,4 +1,5 @@
 #lang scheme
+(provide sum)
 (define (sum-integers a b)
   (if (> a b)
       0
