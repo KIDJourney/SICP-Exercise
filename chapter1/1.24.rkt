@@ -1,6 +1,7 @@
 #lang scheme
 (require "smallest_divisor.rkt")
 (require "common.rkt")
+(require "fast-prime.rkt")
 (define (timed-prime-test n)
   (newline)
   (display n)
@@ -8,7 +9,7 @@
   (start-prime-test n (current-milliseconds)))
 
 (define (start-prime-test n start-time)
-  (if (prime? n)
+  (if (fast-prime? n 10)
       (report-prime(- (current-milliseconds) start-time))
       (smallest-divisor n)
 ))

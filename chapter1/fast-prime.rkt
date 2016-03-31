@@ -1,5 +1,6 @@
 #lang scheme
 (require "common.rkt")
+(provide fast-prime?)
 (define (expmod base exp m)
   (cond ((= exp 0 ) 1)
         ((even? exp)
@@ -8,7 +9,8 @@
         (else
          (remainder (* base (expmod base (- exp 1) m))
                     m))))
-         
+
+
 
 (define (fermat-test n)
   (define (try-it a)
