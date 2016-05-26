@@ -1,0 +1,26 @@
+#lang scheme
+(define (make-point x y)
+  (cons x y))
+(define (point-x point)
+  (car point))
+(define (point-y point)
+  (cdr point))
+
+(define (start-segment segment)
+  (car segment))
+
+(define (end-segment segment)
+  (cdr segment))
+
+(define (make-segment points pointe)
+  (cons points pointe))
+
+(define (avg x y)
+  (/ (+ x y) 2))
+
+(define (midpoint-segment segment)
+  (let ([spoint (start-segment segment)]
+        [epoint (end-segment segment)])
+    (make-point (avg (point-x (start-segment segment)) (point-x (end-segment segment)))
+                (avg (point-y (start-segment segment)) (point-y (end-segment segment))))))
+    
