@@ -23,3 +23,8 @@
   (min (car x) (cdr x)))
 (define (upper-bound x)
   (max (car x) (cdr x)))
+
+(define (sub-interval source sub)
+  (cond [(= (lower-bound sub) (lower-bound source))
+         (make-interval (upper-bound sub) (lower-bound source))]
+        [else (make-interval (lower-bound source) (lower-bound sub))]))
