@@ -1,4 +1,7 @@
 #lang scheme
+(provide accumulate)
+(provide enumerate-tree)
+
 (define square (lambda (x) (* x x)))
 (define (sum-odd-squares tree)
   (cond ((null? tree) 0)
@@ -32,3 +35,49 @@
          (cons (car sequence)
                (filter predicate (cdr sequence))))
         (else (filter predicate (cdr sequence)))))
+
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (enumerate-interval low height)
+  (if (> low height)
+      '()
+      (cons low (enumerate-interval (+ 1 low) height))))
+
+
+(define (enumerate-tree tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (list tree))
+        (else (append (enumerate-tree (car tree))
+              (enumerate-tree (cdr tree))))))
+
+(define (sum-odd-squares2 tree)
+  (accumulate +
+              0
+              (map square
+                   (filter odd?
+                           (enumerate-tree tree)))))
+
+(define (product-of-squares-of-odd-elements sequence)
+  (accumulate *
+               1
+               (map square
+                    (filter odd? (enumerate-tree sequence)))))
+
+(define (even-fibs2 n)
+  (accumulate cons
+              '()
+              (filter even?
+                      (map fib
+                           (enumerate-interval 0 n )))))
+
+
+(define (listfib-squares n)
+  (accumulate cons
+              '()
+              (map square
+                   (map fib
+                        (enumerate-interval 0 n)))))
