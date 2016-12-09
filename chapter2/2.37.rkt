@@ -14,6 +14,10 @@
 (define (transpose mat)
   (accumulate-n cons '() mat))
 
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map 
+
 (accumulate cons '() (list 1 2 3 4))
 
 (transpose matrix)
